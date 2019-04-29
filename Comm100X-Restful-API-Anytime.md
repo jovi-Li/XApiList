@@ -21,18 +21,18 @@
 
     | Endpoints | Support including parameters |
     | - | - |
-    | `get api/v3/conversation/conversations` | agentAssignee, departmentAssignee, contact, createdBy, lastRepliedBy |
-    | `get api/v3/conversation/conversations/{id}` | agentAssignee, departmentAssignee, contact, createdBy, lastRepliedBy, messages |
-    | `get api/v3/conversation/conversations/{id}/messages` | sender |
-    | `get api/v3/conversation/deletedconversations` | agentAssignee, departmentAssignee, contact, createdBy, lastRepliedBy |
-    | `get api/v3/conversation/deletedconversations/{id}` | agentAssignee, departmentAssignee, contact, createdBy, lastRepliedBy, messages |
-    | `get api/v3/conversation/deletedconversations/{id}/messages` | sender |
-    | `get api/v3/conversation/portalconversations/{id}` | contact, messages |
-    | `get api/v3/conversation/portalconversations` | contact |
-    | `get api/v3/conversation/portalconversations/{id}/messages` | sender | 
+    | `get api/v3/anytime/conversations` | agentAssignee, departmentAssignee, contact, createdBy, lastRepliedBy |
+    | `get api/v3/anytime/conversations/{id}` | agentAssignee, departmentAssignee, contact, createdBy, lastRepliedBy, messages |
+    | `get api/v3/anytime/conversations/{id}/messages` | sender |
+    | `get api/v3/anytime/deletedconversations` | agentAssignee, departmentAssignee, contact, createdBy, lastRepliedBy |
+    | `get api/v3/anytime/deletedconversations/{id}` | agentAssignee, departmentAssignee, contact, createdBy, lastRepliedBy, messages |
+    | `get api/v3/anytime/deletedconversations/{id}/messages` | sender |
+    | `get api/v3/anytime/portalconversations/{id}` | contact, messages |
+    | `get api/v3/anytime/portalconversations` | contact |
+    | `get api/v3/anytime/portalconversations/{id}/messages` | sender | 
 
 - Sample:
-    - request: `get api/v3/conversation/conversations/{id}?include=agentAssignee,contact,createdBy,messages`
+    - request: `get api/v3/anytime/conversations/{id}?include=agentAssignee,contact,createdBy,messages`
     - response:
 
         ``` javascript
@@ -79,10 +79,10 @@
 |[Filter](#filter)|/api/v3/anytime/filters| Agent console filters| 
 |[Field & Mappings](#field)|/api/v3/anytime/fields| System fields and custom fields | 
 |[RoutingRule](#routingrule)|/api/v3/anytime/routingRules||
-|[Auto Allocation](#routingrule)|/api/v3/anytime/autoAllocation||
+|[Auto Allocation](#auto-allocation)|/api/v3/anytime/autoAllocation||
 |[Trigger](#routingrule)|/api/v3/anytime/triggers||
-|[Working Time & Holidays](#routingrule)|/api/v3/anytime/workingTimeAndHolidays||
-|[SLA Policies](#routingrule)|/api/v3/anytime/sLAPolicies||
+|[Working Time & Holidays](#working-Time-Holidays)|/api/v3/anytime/workingTimeAndHolidays||
+|[SLA Policies](#sla-policies)|/api/v3/anytime/sLAPolicies||
 |[BlockedSender](#blockedsender)|/api/v3/anytime/blockedSenders|Blocked email or domain| 
 |[EmailAccount](#emailaccount)|/api/v3/anytime/emailAccounts| Email accounts|
 |[IntegrationAccount](#IntegrationAccount)|/api/v3/anytime/IntegrationAccounts| (New)? |  
@@ -99,89 +99,6 @@
 |[Config](#config)|/api/v3/anytime/configs| Get site settings| 
 |[CannedResponse](#cannedresponse)|/api/v3/anytime/cannedResponses|(move to public) |
 |[Attachment](#attachment)|/api/v3/anytime/attachments|(move to public)?| -->
-
-# Resource List  - livechat 
-|Name|EndPoint|Note| 
-|---|---|---|
-|[Chats](#chats)|/api/v3/realtime/historys/chats|  | 
-|[Offline Messages](#offline-messages)|/api/v3/realtime/offlineMessages | |
-|[Missed & Refused Chats](#get-missed-and-refused-chats-list)|/api/v3/realtime/missedAndRefusedChats | | 
-|[Agent chats](#agent-chats)|/api/v3/realtime/agentChats | |
-|[Campaigns](#campaigns)|/api/v3/realtime/campaigns | | 
-|[Installation Code](#installation-code)|/api/v3/realtime/campaigns/{id}/code | | 
-|[Chat Button](#chat-button)|/api/v3/realtime/campaigns/{id}/chatButton| | 
-|[Chat Window](#chat-window)|/api/v3/realtime/campaigns/{id}/chatWindow| | 
-|[Pre-Chat](#pre-chat)|/api/v3/realtime/campaigns/{id}/preChat||
-|[Post-Chat](#post-chat)|/api/v3/realtime/campaigns/{id}/postChat| |
-|[Offline Message ](#offline-messages)|/api/v3/realtime/campaigns/{id}/offlineMessage|| 
-|[Invitation](#invitations)|/api/v3/realtime/campaigns/{id}/invitation|| 
-|[Agent Wrapup](#agent-wrapups)|/api/v3/realtime/campaigns/{id}/agentWrapup| |
-|[Routing Rules](#routing-rules)|/api/v3/realtime/campaigns/{id}/RoutingRules| | 
-|[Language](#languages)|/api/v3/realtime/campaigns/{id}/language| | 
-|[Bot](#languages)|/api/v3/realtime/campaigns/{id}/bot| ?| 
-|[Kb Integration](#languages)|/api/v3/realtime/campaigns/{id}/kbIntegration| ?| 
-|[All Campaigns](#languages)|/api/v3/realtime/campaigns/{id}/allCampaigns| ?|
-|[Auto allocation](#auto-allocation)|/api/v3/realtime/autoAllocation| settings？| 
-|[Auto Translation](#auto-translation)|/api/v3/realtime/autoTranslation| settings(add)| 
-|[Audio & Video Chat](#audio-video-chat)|/api/v3/realtime/audiovideochat| settings(add)| 
-|[Co-browsing](#co-browsing)|/api/v3/realtime/cobrowsing|settings(add)| 
-|[Ban list](#bans)|/api/v3/realtime/Bans| settings| 
-|[Custom Away Status](#custom-away-status)|/api/v3/realtime/customAwayStatus| settings| 
-|[Conversion Actions](#conversion-actions)|/api/v3/realtime/conversionActions | settings Conversions?| 
-|[Segmentations](#visitor-segmentations)|/api/v3/realtime/visitorSegmentations| settings| 
-|[Secure Forms](#secure-forms)|/api/v3/realtime/secureForms| settings| 
-|[Visitor SSO Settings](#visitor-sso-settings)|/api/v3/realtime/visitorSSO | settings| 
-|[Custom Variables](#custom-variables)|/api/v3/realtime/customVariables|settings |
-|[Webhooks](#webhooks)|/api/v3/realtime/webhooks | | 
-|[Chat volume ](#agent-chats)|/api/v3/realtime/reports/chatVolume |reports |
-|[Chat Source ](#agent-chats)|/api/v3/realtime/reports/chatSource |reports |
-|[Queue ](#agent-chats)|/api/v3/realtime/reports/queue |reports |
-|[Wait Time ](#agent-chats)|/api/v3/realtime/reports/waitTime |reports |
-|[Chat Transfer ](#agent-chats)|/api/v3/realtime/reports/chatTransfer |reports |
-|[Availability ](#agent-chats)|/api/v3/realtime/reports/availability |reports |
-|[Agent Status ](#agent-chats)|/api/v3/realtime/reports/agentStatus |reports |
-|[Agent Performance ](#agent-chats)|/api/v3/realtime/reports/agentPerformance |reports |
-|[Workload ](#agent-chats)|/api/v3/realtime/reports/workload |reports |
-|[Efficiency ](#agent-chats)|/api/v3/realtime/reports/efficiency |reports |
-|[Rating ](#agent-chats)|/api/v3/realtime/reports/rating |reports |
-|[Post Chat Survey ](#agent-chats)|/api/v3/realtime/reports/postChatSurvey |reports |
-|[Pre-Chat Survey ](#agent-chats)|/api/v3/realtime/reports/prechatSurvey |reports |
-|[Wrap-up ](#agent-chats)|/api/v3/realtime/reports/survey |reports |
-|[Conversions ](#agent-chats)|/api/v3/realtime/reports/conversions |reports |
-|[Manual Invitation ](#agent-chats)|/api/v3/realtime/reports/manualInvitation |reports |
-|[Auto Invitation ](#agent-chats)|/api/v3/realtime/reports/autoInvitation |reports |
-|[Offline Message ](#agent-chats)|/api/v3/realtime/reports/offlineMessage |reports |
-|[Canned Message ](#agent-chats)|/api/v3/realtime/reports/cannedMessage |reports |
-|[Real Time ](#agent-chats)|/api/v3/realtime/reports/realTime |reports |
-
-
-
-
-<!-- |[Live Chat Config](#live-chat-config)|/api/v3/realtime/config| | 
-|[Attachments](#attachments)|/api/v3/realtime/attachments | (move to public) | 
-|[Departments](#departments)|/api/v3/realtime/departments|(move to public)|
-|[Canned Messages](#canned-messages)|/api/v3/realtime/cannedMessages|(move to public)| 
-|[Canned Message Categorys](#canned-message-categorys)|/api/v3/realtime/cannedMessageCategories|(move to public)| 
-|[Agents](#agents)|/api/v3/realtime/agents| |  -->
-# Resource List - Public
-|Name|EndPoint|Note| 
-|---|---|---| 
-|[Contact](#contact)| /api/v3/contacts|| 
-|[Agent](#agent)| /api/v3/agents||
-|[Site](#site)| /api/v3/site|Account & Billing|
-|[Tag](#tag)|/api/v3/tags|从anytime移交，realtime暂不实现| 
-|[Canned Messages](#agent)| /api/v3/cannedMessages|从anytime和realtime合并并转移到公共模块|
-|[Canned Message Categorys](#canned-message-categorys)|/api/v3/cannedMessageCategories|从anytime和realtime移交,需要合并数据|
-|[Departments](#departments)|/api/v3/departments|从anytime和realtime移交,需要合并数据|
-|[Attachments](#attachments)|/api/v3/attachments|从anytime和realtime移交,需要合并数据|
-|[Credit Card Masking](#credit-card-masking)|/api/v3/creditcardmasking|从reletime移交，anytime需要实现|
-|[Password Policy](#password-policy)|/api/v3/passwordpolicy|从realtime移交|
-|[Audit Log](#audit-log)|/api/v3/auditlog|从reletime移交，anytime需要实现|
-|[Agent Single Sign-On](#agent-single-sign-on)|/api/v3/agentsinglesignon|从realtime移交|
-|[MaximumOn](#maximumOn)|/api/v3/maximumOn|从realtime移交，anytime需要实现？|
-|[Agent reports ](#agent-reports)|/api/v3/reports/agentReports |?reports all？ |
-
-
 
 # Conversations 
 ## objects +
@@ -271,7 +188,7 @@
 
 ## endpoints 
 ### List conversations 
-`get api/v3/conversation/conversations` 
+`get api/v3/anytime/conversations` 
 + Each request returns a maximum of 50 conversations. 
 + Parameters 
     - filterId: integer, filter id  
@@ -297,14 +214,14 @@
 
     | Includes | Description |
     | - | - |
-    | agentAssignee | `get api/v3/conversation/conversations?include=agentAssignee` |
-    | departmentAssignee | `get api/v3/conversation/conversations?include=departmentAssignee` |
-    | contact | `get api/v3/conversation/conversations?include=contact` |
-    | createdBy | `get api/v3/conversation/conversations?include=createdBy` |
-    | lastRepliedBy | `get api/v3/conversation/conversations?include=lastRepliedBy` | 
+    | agentAssignee | `get api/v3/anytime/conversations?include=agentAssignee` |
+    | departmentAssignee | `get api/v3/anytime/conversations?include=departmentAssignee` |
+    | contact | `get api/v3/anytime/conversations?include=contact` |
+    | createdBy | `get api/v3/anytime/conversations?include=createdBy` |
+    | lastRepliedBy | `get api/v3/anytime/conversations?include=lastRepliedBy` | 
 
 ### Get a conversation 
-`get api/v3/conversation/conversations/{id} ` 
+`get api/v3/anytime/conversations/{id} ` 
 + Parameters 
     - id: integer, conversation  
 + Response 
@@ -313,15 +230,15 @@
 
     | Includes | Description |
     | - | - |
-    | agentAssignee | `get api/v3/conversation/conversations/{id}?include=agentAssignee` |
-    | departmentAssignee | `get api/v3/conversation/conversations/{id}?include=departmentAssignee` |
-    | contact | `get api/v3/conversation/conversations/{id}?include=contact` |
-    | createdBy | `get api/v3/conversation/conversations/{id}?include=createdBy` |
-    | lastRepliedBy | `get api/v3/conversation/conversations/{id}?include=lastRepliedBy` |
-    | messages | `get api/v3/conversation/conversations/{id}?include=messages` |
+    | agentAssignee | `get api/v3/anytime/conversations/{id}?include=agentAssignee` |
+    | departmentAssignee | `get api/v3/anytime/conversations/{id}?include=departmentAssignee` |
+    | contact | `get api/v3/anytime/conversations/{id}?include=contact` |
+    | createdBy | `get api/v3/anytime/conversations/{id}?include=createdBy` |
+    | lastRepliedBy | `get api/v3/anytime/conversations/{id}?include=lastRepliedBy` |
+    | messages | `get api/v3/anytime/conversations/{id}?include=messages` |
  
 ### Submit a new conversation 
-`post api/v3/conversation/conversations` 
+`post api/v3/anytime/conversations` 
 - Parameters 
     - subject: string, conversation subject, required
     - channel: string, `portal`, `email`, required 
@@ -346,7 +263,7 @@
     - conversation: [conversation](#conversations)
 
 ### List messages of a conversation 
-`get api/v3/conversation/conversations/{id}/messages` 
+`get api/v3/anytime/conversations/{id}/messages` 
 + Parameters 
     - id: integer, conversation id 
 + Response 
@@ -355,10 +272,10 @@
 
     | Includes | Description |
     | - | - |
-    | sender | `get api/v3/conversation/conversations/{id}/messages?include=sender` |
+    | sender | `get api/v3/anytime/conversations/{id}/messages?include=sender` |
 
 ### Update a conversation 
-`put api/v3/conversation/conversations/{id}` 
+`put api/v3/anytime/conversations/{id}` 
 - Parameters 
     - id: integer, conversation id
     - subject: string, conversation subject
@@ -374,7 +291,7 @@
     - conversation: [conversation](#conversation) 
 
 ### Batch update conversations
-`put api/v3/conversation/conversations/` 
+`put api/v3/anytime/conversations/` 
 + Parameters 
     - ids: integer[], conversation id array
     - status, string
@@ -386,7 +303,7 @@
     - conversations: [conversation](#conversation) list 
 
 ### Reply a conversation 
-`post api/v3/conversation/conversations/{id}/messages` 
+`post api/v3/anytime/conversations/{id}/messages` 
 - Parameters  
     - type: string, `note`, `email`, `reply`, required
     - source: string, `agentConsole`, `API`, default value: `API`
@@ -401,35 +318,35 @@
     - message: [message](#message) 
 
 ### Mark a conversation as read 
-`put api/v3/conversation/conversations/{id}/read` 
+`put api/v3/anytime/conversations/{id}/read` 
 + Parameters 
     - id: integer, conversation id 
 + Response 
     - http status code
 
 ### Mark a conversation as unread 
-`put api/v3/conversation/conversations/{id}/unread` 
+`put api/v3/anytime/conversations/{id}/unread` 
 + Parameters 
     - id: integer, conversation id 
 + Response 
     - http status code
 
 ### Delete a conversation 
-`delete api/v3/conversation/conversations/{id}` 
+`delete api/v3/anytime/conversations/{id}` 
 - Parameters 
     - id: integer, conversation id
 - Response 
     - http status code 
 
 ### Batch delete conversations 
-`delete api/v3/conversation/conversations` 
+`delete api/v3/anytime/conversations` 
 + Parameters 
     - ids: integer[], id array
 + Response 
     - http status code 
 
 ### List deleted conversations 
-`get api/v3/conversation/deletedconversations/` 
+`get api/v3/anytime/deletedconversations/` 
 - Parameters 
     - keywords: string
     - pageIndex: integer
@@ -445,14 +362,14 @@
 
     | Includes | Description |
     | - | - |
-    | agentAssignee | `get api/v3/conversation/deletedconversations?include=agentAssignee` |
-    | departmentAssignee | `get api/v3/conversation/deletedconversations?include=departmentAssignee` |
-    | contact | `get api/v3/conversation/deletedconversations?include=contact` |
-    | createdBy | `get api/v3/conversation/deletedconversations?include=createdBy` |
-    | lastRepliedBy | `get api/v3/conversation/deletedconversations?include=lastRepliedBy` | 
+    | agentAssignee | `get api/v3/anytime/deletedconversations?include=agentAssignee` |
+    | departmentAssignee | `get api/v3/anytime/deletedconversations?include=departmentAssignee` |
+    | contact | `get api/v3/anytime/deletedconversations?include=contact` |
+    | createdBy | `get api/v3/anytime/deletedconversations?include=createdBy` |
+    | lastRepliedBy | `get api/v3/anytime/deletedconversations?include=lastRepliedBy` | 
 
 ### Get a deleted conversation 
-`get api/v3/conversation/deletedconversations/{id}` 
+`get api/v3/anytime/deletedconversations/{id}` 
 - Parameters 
     - id: integer, conversation id 
 - Response 
@@ -461,15 +378,15 @@
 
     | Includes | Description |
     | - | - |
-    | agentAssignee | `get api/v3/conversation/deletedconversations/{id}?include=agentAssignee` |
-    | departmentAssignee | `get api/v3/conversation/deletedconversations/{id}?include=departmentAssignee` |
-    | contact | `get api/v3/conversation/deletedconversations/{id}?include=contact` |
-    | createdBy | `get api/v3/conversation/deletedconversations/{id}?include=createdBy` |
-    | lastRepliedBy | `get api/v3/conversation/deletedconversations/{id}?include=lastRepliedBy` |
-    | messages | `get api/v3/conversation/deletedconversations/{id}?include=messages` |
+    | agentAssignee | `get api/v3/anytime/deletedconversations/{id}?include=agentAssignee` |
+    | departmentAssignee | `get api/v3/anytime/deletedconversations/{id}?include=departmentAssignee` |
+    | contact | `get api/v3/anytime/deletedconversations/{id}?include=contact` |
+    | createdBy | `get api/v3/anytime/deletedconversations/{id}?include=createdBy` |
+    | lastRepliedBy | `get api/v3/anytime/deletedconversations/{id}?include=lastRepliedBy` |
+    | messages | `get api/v3/anytime/deletedconversations/{id}?include=messages` |
 
 ### List messages of a deleted conversation
-`get api/v3/conversation/deletedconversations/{id}/messages` 
+`get api/v3/anytime/deletedconversations/{id}/messages` 
 - Parameters 
     - id: integer, conversation id
 - Response 
@@ -478,53 +395,53 @@
 
     | Includes | Description |
     | - | - |
-    | sender | `get api/v3/conversation/deletedconversations/{id}/messages?include=sender` |
+    | sender | `get api/v3/anytime/deletedconversations/{id}/messages?include=sender` |
 
 
 ### Restore a deleted conversation 
-`post api/v3/conversation/deletedconversations/{id}/restore ` 
+`post api/v3/anytime/deletedconversations/{id}/restore ` 
 - Parameters 
     - id: integer, conversation id 
 - Response 
     - deletedconversation: [conversation](#conversation)  
 
 ### Delete a conversation permanently 
-`delete api/v3/conversation/deletedconversations/{id}` 
+`delete api/v3/anytime/deletedconversations/{id}` 
 - Parameters 
     - id: integer, conversation id 
 - Response 
     - http status code 
 
 ### Get a conversation draft 
-`get api/v3/conversation/conversations/{id}/draft` 
+`get api/v3/anytime/conversations/{id}/draft` 
 - Parameters 
     - id: integer, conversation id 
 - Response 
     - conversationDraft: [conversation draft](#conversation-draft) 
 
 ### Create a conversation draft 
-`post api/v3/conversation/conversations/{id}/draft` 
+`post api/v3/anytime/conversations/{id}/draft` 
 - Parameters 
     - [conversation draft](#conversation-draft) 
 - Response 
     - conversationDraft: [conversation draft](#conversation-draft) 
 
 ### Update a conversation draft 
-`put api/v3/conversation/conversations/{id}/draft` 
+`put api/v3/anytime/conversations/{id}/draft` 
 - Parameters 
     - [conversation draft](#conversation-draft) 
 - Response 
     - conversationDraft: [conversation draft](#conversation-draft) 
 
 ### Delete a conversation draft 
-`delete api/v3/conversation/conversations/{id}/draft` 
+`delete api/v3/anytime/conversations/{id}/draft` 
 - Parameters 
     - id: integer, conversation id 
 - Response 
     - http status code 
 
 ### Merge a conversation 
-`post api/v3/conversation/conversations/{id}/merge`
+`post api/v3/anytime/conversations/{id}/merge`
 - Parameters 
     - id: integer, target conversation id, 
     - sourceId: integer, source conversation id 
@@ -532,7 +449,7 @@
     - conversation: [conversation](#conversation) 
 
 ### List unread conversations number for filters 
-`get api/v3/conversation/conversations/unreadCount?filterIds={filterid1}&filterIds={filterid2}&filterIds={filterid3}`
+`get api/v3/anytime/conversations/unreadCount?filterIds={filterid1}&filterIds={filterid2}&filterIds={filterid3}`
 - Parameters 
     - filterIds: filter id array 
 - Response 
@@ -569,7 +486,7 @@
 
 ## endpoints
 ### Get a portal conversation by id
-`get api/v3/conversation/portalconversations/{id}`
+`get api/v3/anytime/portalconversations/{id}`
 - Parameters
     - id, integer, portal conversation id
     - contactId, integer
@@ -579,11 +496,11 @@
 
     |Includes| Description |
     | - | - |
-    | contact | `get api/v3/conversation/portalconversations/{id}?include=contact` | 
-    | messages | `get api/v3/conversation/portalconversations/{id}?include=messages` |
+    | contact | `get api/v3/anytime/portalconversations/{id}?include=contact` | 
+    | messages | `get api/v3/anytime/portalconversations/{id}?include=messages` |
  
 ### List portal conversations
-`get api/v3/conversation/portalconversations`
+`get api/v3/anytime/portalconversations`
 - Parameters:
     - contactId, integer, required
 - Response: 
@@ -592,10 +509,10 @@
 
     |Includes| Description |
     | - | - |
-    | contact | `get api/v3/conversation/portalconversations?include=contact` |  
+    | contact | `get api/v3/anytime/portalconversations?include=contact` |  
 
 ### Submit a portal conversation
-`post api/v3/conversation/portalconversations`
+`post api/v3/anytime/portalconversations`
 - Parameters: 
     - subject: string, subject, required
     - contactId: integer, id of the contact who submitted the portal conversation
@@ -608,7 +525,7 @@
   - portalconversation: [portal conversation](#portal-conversation) 
 
 ### Close a portalconversation
-`put api/v3/conversation/portalconversations/{id}/close` 
+`put api/v3/anytime/portalconversations/{id}/close` 
 - Parameters: 
     - id, integer, portal conversation id,
     - contactId, integer, required
@@ -616,7 +533,7 @@
     - portalconversation: [portal conversation](#portal-conversation) 
 
 ### Reopen a portalconversation
-`put api/v3/conversation/portalconversations/{id}/reopen` 
+`put api/v3/anytime/portalconversations/{id}/reopen` 
 - Parameters: 
     - id, integer, portal conversation id,
     - contactId, integer, required
@@ -624,7 +541,7 @@
     - portalconversation: [portal conversation](#portal-conversation) 
 
 ### List messages of a portal conversation 
-`get api/v3/conversation/portalconversations/{id}/messages`
+`get api/v3/anytime/portalconversations/{id}/messages`
 - Parameters: 
     - id, integer
     - contactId, integer
@@ -634,10 +551,10 @@
 
     |Includes| Description |
     | - | - |
-    | sender| `get api/v3/conversation/portalconversations/{id}/messages?include=sender` | 
+    | sender| `get api/v3/anytime/portalconversations/{id}/messages?include=sender` | 
 
 ### Reply a portal conversation
- `post api/v3/conversation/portalconversations/{id}/messages`
+ `post api/v3/anytime/portalconversations/{id}/messages`
 - Parameters:
     - id: integer
     - contactId: integer required
@@ -648,14 +565,14 @@
     - message: [portal conversation message](#portal-conversation-message)
 
 ### Contact mark a portal conversation as read
-`put api/v3/conversation/portalconversations/{id}/read`
+`put api/v3/anytime/portalconversations/{id}/read`
 - Parameters 
     - id: integer, conversation id 
 - Response 
     - http status code
 
 ### Contact mark a portal conversation as unread
-`put api/v3/conversation/portalconversations/{id}/unread`
+`put api/v3/anytime/portalconversations/{id}/unread`
 - Parameters 
     - id: integer, conversation id 
 - Response 
@@ -682,14 +599,14 @@
 
 ## endpoints 
 ### List all public and private filters 
-`get /api/v3/conversation/filters`
+`get /api/v3/anytime/filters`
 - Parameters 
     - no parameters 
 - Response 
     - filters: [filter](#filter) list, without conditions
 
 ### Create a new filter 
-`post api/v3/conversation/filters`
+`post api/v3/anytime/filters`
 - Parameters 
     - name: string, filter name, required 
     - isPrivate: boolean, if private filter, default value: `false` 
@@ -698,14 +615,14 @@
     - filters: [filter](#filter) list 
 
 ### Get a filter and its conditions 
-`get api/v3/conversation/filters/{id}` 
+`get api/v3/anytime/filters/{id}` 
 - Parameters 
     - id: integer, filter id 
 - Response 
     - filter: [filter](#filter) 
 
 ### Update a filter 
-`put api/v3/conversation/filters/{id}` 
+`put api/v3/anytime/filters/{id}` 
 - Parameters 
     - id: integer, filter id 
     - name: string, filter name, required 
@@ -715,7 +632,7 @@
     - filter: [filter](#filter) 
 
 ### Delete a filter 
-`delete api/v3/conversation/filters/{id}` 
+`delete api/v3/anytime/filters/{id}` 
 - Parameters 
     - id: integer, filter id 
 - Response 
@@ -747,13 +664,13 @@
 
 ## endpoints 
 ### List all fields and their options 
-`get api/v3/conversation/fields` 
+`get api/v3/anytime/fields` 
 - Parameters
     - no parameters
 - Response 
     - fields: [field](#field) list 
 
-# Attachments 
+<!-- # Attachments 
 ## objects 
 ### attachment 
 | Name | Type | Description | 
@@ -764,7 +681,7 @@
 | `isAvailable` | boolean | if the attachment is available | 
 ## endpoints 
 ### Upload attachment 
-`post /api/v3/conversation/attachments` 
+`post /api/v3/anytime/attachments` 
 - Content-type
     - multipart/form-data
 - Parameters 
@@ -780,11 +697,11 @@
  - attachment: [attachment](#attachment) 
 
 ### Delete attachment 
-`delete /api/v3/conversation/attachments/{guid}` 
+`delete /api/v3/anytime/attachments/{guid}` 
 - Parameters 
     - guid: string, the guid of the attachment
 - Response 
-    - httpStatusCode
+    - httpStatusCode -->
 
 
 # BlockedSenders 
@@ -797,14 +714,14 @@
 
 ## endpoints 
 ### List blocked senders 
-`get /api/v3/conversation/blockedSenders` 
+`get /api/v3/anytime/blockedSenders` 
 - Parameters 
     - email: string, domain or email address 
 - Response 
     - blockedSenders: [block sender](#blocked-sender) list 
 
 ### Add/update a block sender 
-`put api/v3/conversation/blockedSenders` 
+`put api/v3/anytime/blockedSenders` 
 - Parameters 
     - `email`, string, domain or email address 
     - `blockType`, string, `blockEmailasJunk`, `rejectEmail`, `blockDomainasJunk`, `rejectDomain`
@@ -812,13 +729,13 @@
     - blockedSender: [block sender](#blocked-sender) 
 
 ### Remove a block sender 
-`delete api/v3/conversation/blockedSenders` 
+`delete api/v3/anytime/blockedSenders` 
 - Parameters 
    - email: string, domain or email address 
 - Response 
     - http status code
 
-# CannedResponses 
+<!-- # CannedResponses 
 ## objects 
 ### canned response 
 | Name | Type | Description | 
@@ -831,24 +748,24 @@
 
 ## endpoints 
 ### List all canned responses 
-`get api/v3/conversation/cannedResponses` 
+`get api/v3/anytime/cannedResponses` 
 - Parameters 
     - no parameters
 - Response 
-    - cannedResponses: [Canned responses](#canned-response) list 
+    - cannedResponses: [Canned responses](#canned-response) list  -->
 
 
-# Configs 
+<!-- # Configs 
 ### Get site configs about conversation 
-`get api/v3/conversation/configs` 
+`get api/v3/anytime/configs` 
 - Parameters 
     - no parameters
 - Response 
     - configs
         - isEnabledDepartment: boolean 
-        - recipientLimitPerEmail: integer 
+        - recipientLimitPerEmail: integer  -->
 
-# Department 
+<!-- # Department 
 ## objects 
 ### department 
 | Name | Type | Description | 
@@ -867,14 +784,14 @@
 
 ## endpoints 
 ### Get a department 
-`get api/v3/conversation/departments/{id} ` 
+`get api/v3/anytime/departments/{id} ` 
 - Response 
     - department: [department](#department) 
 
 ### List all departments 
-`get api/v3/conversation/departments` 
+`get api/v3/anytime/departments` 
 - Response 
-    - departments: [department](#department) List without department member. 
+    - departments: [department](#department) List without department member.  -->
 
 # EmailAccounts 
 ## objects 
@@ -891,7 +808,7 @@
 
 ## endpoints 
 ### List all enabled email accounts 
-`get api/v3/conversation/emailAccounts` 
+`get api/v3/anytime/emailAccounts` 
 - Response 
     - emailAccounts: [email account](#email-account) list 
 
@@ -915,7 +832,7 @@
 
 ## endpoints 
 ### List junk emails
-`get api/v3/conversation/junkEmails` 
+`get api/v3/anytime/junkEmails` 
 
 - Parameters 
     - keywords: string
@@ -930,33 +847,33 @@
     - currentPage: string
 
 ### Get a junk email 
-`get api/v3/conversation/junkEmails/{id}` 
+`get api/v3/anytime/junkEmails/{id}` 
 - Parameters 
     - id: integer, email id 
 - Response 
     - junkEmail: [junk email](#junk-email) 
 
 ### Update a junk email 
-`put api/v3/conversation/junkEmails/{id}` 
+`put api/v3/anytime/junkEmails/{id}` 
 - Parameters 
     - isRead: boolean, 
 - Response 
     - junkEmail: [junk email](#junk-email) 
 
 ### Restore a junk email to a normal conversation 
-`post api/v3/conversation/junkEmails/{id}/notJunk` 
+`post api/v3/anytime/junkEmails/{id}/notJunk` 
 - Parameters 
     - id: integer, email id 
 - Response 
     - conversation: [conversation](#conversation) 
 
 ### Delete a junk email 
-`delete api/v3/conversation/junkEmails/{id}` 
+`delete api/v3/anytime/junkEmails/{id}` 
 - Parameters 
     - id: integer, junk email id 
 - Response 
     - http status code 
-
+<!-- 
 # Tags 
 ## objects 
 ### tag 
@@ -967,19 +884,19 @@
 | `conversationCount` | integer | the number of conversations with the tag | 
 ## endpoints 
 ### List all tags 
-`Get api/v3/conversation/tags` 
+`Get api/v3/anytime/tags` 
 - Response 
     - tags: [tag](#tag) list 
 
 ### Add a tag 
-`Post api/v3/conversation/tags` 
+`Post api/v3/anytime/tags` 
 - Parameters 
     - name: string, tag name 
 - Response 
     - tag: [tag](#tag) 
 
 ### Update One Tag 
-`Put api/v3/conversation/tags/{id}` 
+`Put api/v3/anytime/tags/{id}` 
 - Parameters 
     - id: integer, tag id 
     - name: string, tag name 
@@ -987,11 +904,11 @@
     - tag: [tag](#tag) 
 
 ### Delete a tag 
-`Delete api/v3/conversation/tags/{id}` 
+`Delete api/v3/anytime/tags/{id}` 
 - Parameters 
     - id: integer, tag id 
 - Response 
-    - http status code
+    - http status code -->
 
 
 # Routingrules
@@ -1035,19 +952,19 @@
 
 ## endpoints 
 ### List all routingrules 
-`Get api/v3/conversation/Routingrules` 
+`Get api/v3/anytime/Routingrules` 
 - Response 
     - routingrules: [routingrule](#routingrule) list 
 
 ### Enable a routingrules 
-`Put api/v3/conversation/Routingrules/{id}/enable` 
+`Put api/v3/anytime/Routingrules/{id}/enable` 
 - Parameters
   - isEnable:boolean , enable or not,first time to enable will add a default routing rule
 - Response 
     - routingrule: [routingrule](#routingrule)  
 
 ### Update One routingrule 
-`Put api/v3/conversation/Routingrules/{id}` 
+`Put api/v3/anytime/Routingrules/{id}` 
 - Parameters 
     - `isEnable` , boolean, is Enable 
     - `type`,string , `simple` / `cusomterrules` 
@@ -1061,13 +978,17 @@
     - routingrule: [routingrule](#routingrule) 
 
 ### List all customerRules of routingrule
-`Get api/v3/conversation/Routingrules/{id}/customerrules` 
+`Get api/v3/anytime/Routingrules/{id}/customerrules` 
 
 - Response 
     - http status code
 
 ### add a customerRule  
-`Get api/v3/conversation/Routingrules/{id}/customerrules` 
+`Get api/v3/anytime/Routingrules/{id}/customerrules` 
 
 - Response 
     - http status code
+
+# EmailAccounts 
+## objects 
+### email account 
