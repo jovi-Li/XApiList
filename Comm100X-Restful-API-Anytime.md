@@ -1,5 +1,5 @@
 # Anytime Conversation
-  Conversation=Anytime Conversation
+  Anytime=Anytime Conversation
 # Authentication 
 - Comm100 AnyTime Conversation API provides 2 authentication methods: 
     - API_key Authentication 
@@ -74,24 +74,24 @@
 # Resource List - AnytimeConversation
 |Name|EndPoint|Note| 
 |---|---|---| 
-|[Conversation](#conversation)|/api/v3/anytime/conversations| | 
-|[Message](#conversation)|/api/v3/anytime/conversations/{id}/messages| | 
-|[Filter](#filter)|/api/v3/anytime/filters| Agent console filters| 
+|[Conversations](#conversation)|/api/v3/anytime/conversations| | 
+|[Messages](#conversation)|/api/v3/anytime/conversations/{id}/messages| | 
+|[Filters](#filter)|/api/v3/anytime/filters| Agent console filters| 
 |[Field & Mappings](#field)|/api/v3/anytime/fields| System fields and custom fields | 
-|[RoutingRule](#routingrule)|/api/v3/anytime/routingRules||
+|[Routing Rules](#routingrules)|/api/v3/anytime/routingRules||
 |[Auto Allocation](#auto-allocation)|/api/v3/anytime/autoAllocation||
-|[Trigger](#routingrule)|/api/v3/anytime/triggers||
+|[Triggers](#triggers)|/api/v3/anytime/triggers||
 |[Working Time & Holidays](#working-Time-Holidays)|/api/v3/anytime/workingTimeAndHolidays||
 |[SLA Policies](#sla-policies)|/api/v3/anytime/sLAPolicies||
-|[BlockedSender](#blockedsender)|/api/v3/anytime/blockedSenders|Blocked email or domain| 
-|[EmailAccount](#emailaccount)|/api/v3/anytime/emailAccounts| Email accounts|
-|[IntegrationAccount](#IntegrationAccount)|/api/v3/anytime/IntegrationAccounts| (New)? |  
-|[JunkEmail](#junkemails)|/api/v3/anytime/junkEmails| Emails from blocked senders| 
+|[Blocked Senders](#blocked-sender)|/api/v3/anytime/blockedSenders|Blocked email or domain| 
+|[Email Accounts](#email-accounts)|/api/v3/anytime/emailAccounts| Email accounts|
+|[Integration Accounts](#integration-accounts)|/api/v3/anytime/IntegrationAccounts| (New)? |  
+|[Junk Emails](#junke-mails)|/api/v3/anytime/junkEmails| Emails from blocked senders| 
 |[Right Now Reports](#reports)|/api/v3/anytime/reports/rightNow| | 
 |[Volume Reports](#reports)|/api/v3/anytime/reports/volume|  | 
 |[Channel Reports](#reports)|/api/v3/anytime/reports/channel|  | 
 |[Efficiency Reports](#reports)|/api/v3/anytime/reports/efficiency|  |
-|[Portalconversation](#portalconversation)|/api/v3/anytime/portalconversations|  |
+|[Portalconversations](#portalconversation)|/api/v3/anytime/portalconversations|  |
 <!-- 
 |[Webhooks](#webhooks)|/api/v3/realtime/webhooks | | 
 |[Notification](#notification)|/api/v3/anytime/notification| (new)? angent notification to server | 
@@ -812,6 +812,11 @@
 - Response 
     - emailAccounts: [email account](#email-account) list 
 
+# IntegrationAccount 
+## objects 
+### integration account
+(add)
+
 # JunkEmails 
 ## objects 
 ### junk email 
@@ -989,6 +994,22 @@
 - Response 
     - http status code
 
-# EmailAccounts 
+# Auto Allocation 
 ## objects 
-### email account 
+### auto allocation
+(to add)
+
+# Trigger 
+## objects 
+### trigger
+(to add)
+
+# Working Time & Holidays 
+## objects 
+### working time & holidays 
+(to add)
+
+# SLA Policies 
+## objects 
+### sLA policies
+(to add)
