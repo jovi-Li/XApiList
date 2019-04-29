@@ -667,7 +667,7 @@
 `Get api/v3/anytime/Routingrules/{id}/customerrules` 
 
 - Response 
-    - http status code
+     - customerRules: [routingrules](###customerRul) list
 
 ### add a customerRule  
 `post api/v3/anytime/Routingrules/{id}/customerrules` 
@@ -679,14 +679,14 @@
 `put api/v3/anytime/Routingrules/{id}/customerrules/{customerruleId}/copy` 
 - Parameters 
 - Response 
-    - customerRule:[customerRule](###customerRule)
+    - customerRules: [routingrules](###customerRul) list
   
 ### sort a customerRule  
 `put api/v3/anytime/Routingrules/{id}/customerrules/{customerruleId}/sort` 
 - Parameters
     - customerRules:[customerRules](###customerRule)
 - Response 
-    - routingrule: [routingrule](#routingrule)
+     - customerRules: [routingrules](###customerRul) list
 
 ### delete a customerRule 
 `delete api/v3/anytime/Routingrules/customerrules/{id}` 
@@ -826,7 +826,21 @@
 # IntegrationAccount 
 ## objects 
 ### integration account
-(add)
+| Name | Type | Description | 
+| - | - | - | 
+| `id` | integer | id | 
+| `appId` | string | App Id |  
+| `accountName` | string | AccountName | 
+| `accountOriginalId` | string | Account Original Id | 
+| `isEnable` | boolean | if enable | 
+
+
+## endpoints 
+### List all enabled email accounts 
+`get api/v3/anytime/integrationAccounts` 
+- Response 
+    - integrationAccounts: [integration account](#integration-account) list 
+    - 
 
 # Junk Emails 
 ## objects 
