@@ -1,9 +1,23 @@
 # Comm100 API
-# Resource List 
+# Resource List - Common
 |Name|EndPoint|Note| 
 |---|---|---| 
-|[Contact](#contact)| /api/v2/account/contacts|for contact| 
-|[Agent](#agent)| /api/v2/account/agents|for agent|
+|[Contact](#contact)| /api/v3/contacts|| 
+|[Contact identities](#contact)| /api/v3/contacts/{Id}/identities|| 
+|[Visitor SSO Settings](#visitor-sso-settings)|/api/v3/visitorSSO | 从realtime转移到公共模块| 
+|[Agent](#agent)| /api/v3/agents||
+|[Site](#site)| /api/v3/sites|Account & Billing|
+|[Tag](#tag)|/api/v3/tags|从anytime转移过来，realtime暂不实现| 
+|[Canned Messages](#agent)|/api/v3/cannedMessages|从anytime和realtime合并并转移到公共模块|
+|[Canned Message Categorys](#canned-message-categorys)|/api/v3/cannedMessageCategories|从anytime和realtime移交,需要合并数据|
+|[Departments](#departments)|/api/v3/departments|从anytime和realtime合并并转移到公共模块|
+|[Attachments](#attachments)|/api/v3/attachments|从anytime和realtime合并并转移到公共模块|
+|[Credit Card Masking](#credit-card-masking)|/api/v3/creditcardMasking||
+|[Password Policy](#password-policy)|/api/v3/passwordPolicys||
+|[Audit Log](#audit-log)|/api/v3/auditLogs||
+|[Agent Single Sign-On](#agent-single-sign-on)|/api/v3/agentSingleSignOn||
+|[Agent reports ](#agent-reports)|/api/v3/reports/agentReports |Availability/Canned Message  |
+|[webhooks](#webhooks)|/api/v3/webhooks/ |  |
 
 # Contact
 ## Objects

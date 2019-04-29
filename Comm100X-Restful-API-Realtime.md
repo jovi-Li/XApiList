@@ -2,39 +2,68 @@
 
 Comm100 Live Chat API allows you to pull the raw livechat data from Comm100 Live Chat into your own systems.
 
-# Resource List livechat 
+# Resource List  - RealtimeConversation 
 |Name|EndPoint|Note| 
 |---|---|---|
-|[campaigns](#campaigns)|/api/v2/livechat/campaigns | | 
-|[Installation Code](#installation-code)|/api/v2/livechat/campaigns/{id}/code | Get installation code of a campaign| 
-|[Chat Button](#chat-button)|/api/v2/livechat/campaigns/{id}/chatButton| Chat Button | 
-|[Chat Window](#chat-window)|/api/v2/livechat/campaigns/{id}/chatWindow| Chat Window | 
-|[Pre-Chat](#pre-chat)|/api/v2/livechat/campaigns/{id}/preChat| Pre-Chat|
-|[Post-Chat](#post-chat)|/api/v2/livechat/campaigns/{id}/postChat| Post-Chat|
-|[Offline Messages](#offline-messages)|/api/v2/livechat/campaigns/{id}/offlineMessage| Offline Messages| 
-|[Invitations](#invitations)|/api/v2/livechat/campaigns/{id}/invitation| Invitations| 
-|[Agent Wrapups](#agent-wrapups)|/api/v2/livechat/campaigns/{id}/agentWrapup| Agent Wrapups|
-|[Routing Rules](#routing-rules)|/api/v2/livechat/campaigns/{id}/RoutingRules| Routing Rules| 
-|[Languages](#languages)|/api/v2/livechat/campaigns/{id}/language| Languages| 
-|[Canned Messages](#canned-messages)|/api/v2/livechat/cannedMessages  | | 
-|[Canned Message Categorys](#canned-message-categorys)|/api/v2/livechat/cannedMessageCategories| | 
-|[Departments](#departments)|/api/v2/livechat/departments|Departments | 
-|[Custom Away Status](#custom-away-status)|/api/v2/livechat/customAwayStatus| | 
-|[Bans](#bans)|/api/v2/livechat/Bans| | 
-|[Conversion Actions](#conversion-actions)|/api/v2/livechat/conversionActions | | 
-|[Visitor Segmentations](#visitor-segmentations)|/api/v2/livechat/visitorSegmentations| | 
-|[Visitor SSO Settings](#visitor-sso-settings)|/api/v2/livechat/visitorSSO | | 
-|[Auto allocation](#auto-allocation)|/api/v2/livechat/autoAllocation | | 
-|[Live Chat Config](#live-chat-config)|/api/v2/livechat/config| | 
-|[Secure Forms](#secure-forms)|/api/v2/livechat/secureForms| | 
-|[Webhooks](#webhooks)|/api/v2/livechat/webhooks | | 
-|[Custom Variables](#custom-variables)|/api/v2/livechat/customVariables| | 
-|[Agents](#agents)|/api/v2/livechat/agents| | 
-|[Chats](#chats)|/api/v2/livechat/chats| | 
-|[Offline Messages](#offline-messages)|/api/v2/livechat/offlineMessages | | 
-|[Missed & Refused Chats](#get-missed-and-refused-chats-list)|/api/v2/livechat/missedAndRefusedChats | | 
-|[Agent chats](#agent-chats)|/api/v2/livechat/agentChats | | 
-|[Attachments](#attachments)|/api/v2/livechat/attachments | | 
+|[Chats](#chats)|/api/v3/realtime/Historys/chats|  | 
+|[Offline Messages](#offline-messages)|/api/v3/realtime/Historys/offlineMessages | |
+|[Missed & Refused Chats](#get-missed-and-refused-chats-list)|/api/v3/realtime/Historys/missedAndRefusedChats | | 
+|[Agent chats](#agent-chats)|/api/v3/realtime/Historys/agentChats | |
+|[Campaigns](#campaigns)|/api/v3/realtime/campaigns | | 
+|[Installation Code](#installation-code)|/api/v3/realtime/campaigns/{id}/code | | 
+|[Chat Button](#chat-button)|/api/v3/realtime/campaigns/{id}/chatButton| | 
+|[Chat Window](#chat-window)|/api/v3/realtime/campaigns/{id}/chatWindow| | 
+|[Pre-Chat](#pre-chat)|/api/v3/realtime/campaigns/{id}/preChat||
+|[Post-Chat](#post-chat)|/api/v3/realtime/campaigns/{id}/postChat| |
+|[Offline Message ](#offline-messages)|/api/v3/realtime/campaigns/{id}/offlineMessage|| 
+|[Invitation](#invitations)|/api/v3/realtime/campaigns/{id}/invitation|| 
+|[Agent Wrapup](#agent-wrapups)|/api/v3/realtime/campaigns/{id}/agentWrapup| |
+|[Routing Rules](#routing-rules)|/api/v3/realtime/campaigns/{id}/RoutingRules| | 
+|[Language](#languages)|/api/v3/realtime/campaigns/{id}/language| | 
+|[Bot](#languages)|/api/v3/realtime/campaigns/{id}/bot| | 
+|[Kb Integration](#languages)|/api/v3/realtime/campaigns/{id}/kbIntegration| | 
+|[All Campaigns](#languages)|/api/v3/realtime/campaigns/allCampaigns| |
+|[Auto allocation](#auto-allocation)|/api/v3/realtime/autoAllocation| settings| 
+|[Auto Translation](#auto-translation)|/api/v3/realtime/autoTranslation| settings| 
+|[Audio & Video Chat](#audio-video-chat)|/api/v3/realtime/audiovideochat| settings| 
+|[Co-browsing](#co-browsing)|/api/v3/realtime/cobrowsing|settings| 
+|[Ban list](#bans)|/api/v3/realtime/Bans| settings| 
+|[Custom Away Status](#custom-away-status)|/api/v3/realtime/customAwayStatus| settings| 
+|[Conversion Actions](#conversion-actions)|/api/v3/realtime/conversionActions | settings | 
+|[Segmentations](#visitor-segmentations)|/api/v3/realtime/visitorSegmentations| settings| 
+|[Secure Forms](#secure-forms)|/api/v3/realtime/secureForms| settings| 
+|[Custom Variables](#custom-variables)|/api/v3/realtime/customVariables|settings |
+|[Chat volume ](#agent-chats)|/api/v3/realtime/reports/chatVolume |reports |
+|[Chat Source ](#agent-chats)|/api/v3/realtime/reports/chatSource |reports |
+|[Queue ](#agent-chats)|/api/v3/realtime/reports/queue |reports |
+|[Wait Time ](#agent-chats)|/api/v3/realtime/reports/waitTime |reports |
+|[Chat Transfer ](#agent-chats)|/api/v3/realtime/reports/chatTransfer |reports |
+|[Availability ](#agent-chats)|/api/v3/realtime/reports/availability |reports |
+|[Agent Status ](#agent-chats)|/api/v3/realtime/reports/agentStatus |reports |
+|[Agent Performance ](#agent-chats)|/api/v3/realtime/reports/agentPerformance |reports |
+|[Workload ](#agent-chats)|/api/v3/realtime/reports/workload |reports |
+|[Efficiency ](#agent-chats)|/api/v3/realtime/reports/efficiency |reports |
+|[Rating ](#agent-chats)|/api/v3/realtime/reports/rating |reports |
+|[Post Chat Survey ](#agent-chats)|/api/v3/realtime/reports/postChatSurvey |reports |
+|[Pre-Chat Survey ](#agent-chats)|/api/v3/realtime/reports/prechatSurvey |reports |
+|[Wrap-up ](#agent-chats)|/api/v3/realtime/reports/survey |reports |
+|[Conversions ](#agent-chats)|/api/v3/realtime/reports/conversions |reports |
+|[Manual Invitation ](#agent-chats)|/api/v3/realtime/reports/manualInvitation |reports |
+|[Auto Invitation ](#agent-chats)|/api/v3/realtime/reports/autoInvitation |reports |
+|[Offline Message ](#agent-chats)|/api/v3/realtime/reports/offlineMessage |reports |
+|[Canned Message ](#agent-chats)|/api/v3/realtime/reports/cannedMessage |reports |
+|[Real Time ](#agent-chats)|/api/v3/realtime/reports/realTime |reports |
+
+
+
+<!-- |[Live Chat Config](#live-chat-config)|/api/v3/realtime/config| | 
+|[Attachments](#attachments)|/api/v3/realtime/attachments | (move to public) | 
+|[Departments](#departments)|/api/v3/realtime/departments|(move to public)|
+|[Canned Messages](#canned-messages)|/api/v3/realtime/cannedMessages|(move to public)| 
+|[Canned Message Categorys](#canned-message-categorys)|/api/v3/realtime/cannedMessageCategories|(move to public)| 
+|[Agents](#agents)|/api/v3/realtime/agents| |  
+|[Visitor SSO Settings](#visitor-sso-settings)|/api/v3/realtime/visitorSSO | settings| 
+-->
 
 
 ## Campaigns

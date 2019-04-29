@@ -70,27 +70,30 @@
         }, 
         ``` 
 
+
 # Resource List - AnytimeConversation
 |Name|EndPoint|Note| 
 |---|---|---| 
 |[Conversation](#conversation)|/api/v3/anytime/conversations| | 
+|[Message](#conversation)|/api/v3/anytime/conversations/{id}/messages| | 
 |[Filter](#filter)|/api/v3/anytime/filters| Agent console filters| 
 |[Field & Mappings](#field)|/api/v3/anytime/fields| System fields and custom fields | 
-|[RoutingRule](#routingrule)|/api/v3/anytime/routingRule|(new)|
-|[Auto Allocation](#routingrule)|/api/v3/anytime/autoallocation|(new)|
-|[Trigger](#routingrule)|/api/v3/anytime/trigger|(new)|
-|[Working Time & Holidays](#routingrule)|/api/v3/anytime/workingtimeandholidays|(new)|
-|[SLA Policies](#routingrule)|/api/v3/anytime/slapolicies|(new)|
+|[RoutingRule](#routingrule)|/api/v3/anytime/routingRules||
+|[Auto Allocation](#routingrule)|/api/v3/anytime/autoAllocation||
+|[Trigger](#routingrule)|/api/v3/anytime/triggers||
+|[Working Time & Holidays](#routingrule)|/api/v3/anytime/workingTimeAndHolidays||
+|[SLA Policies](#routingrule)|/api/v3/anytime/sLAPolicies||
 |[BlockedSender](#blockedsender)|/api/v3/anytime/blockedSenders|Blocked email or domain| 
 |[EmailAccount](#emailaccount)|/api/v3/anytime/emailAccounts| Email accounts|
 |[IntegrationAccount](#IntegrationAccount)|/api/v3/anytime/IntegrationAccounts| (New)? |  
 |[JunkEmail](#junkemails)|/api/v3/anytime/junkEmails| Emails from blocked senders| 
-|[Right Now Reports](#reports)|/api/v3/anytime/reports/rightnow| (new) | 
-|[Volume Reports](#reports)|/api/v3/anytime/reports/volume| (new) | 
-|[Channel Reports](#reports)|/api/v3/anytime/reports/channel| (new) | 
-|[Efficiency Reports](#reports)|/api/v3/anytime/reports/efficiency| (new) |
+|[Right Now Reports](#reports)|/api/v3/anytime/reports/rightNow| | 
+|[Volume Reports](#reports)|/api/v3/anytime/reports/volume|  | 
+|[Channel Reports](#reports)|/api/v3/anytime/reports/channel|  | 
+|[Efficiency Reports](#reports)|/api/v3/anytime/reports/efficiency|  |
 |[Portalconversation](#portalconversation)|/api/v3/anytime/portalconversations|  |
 <!-- 
+|[Webhooks](#webhooks)|/api/v3/realtime/webhooks | | 
 |[Notification](#notification)|/api/v3/anytime/notification| (new)? angent notification to server | 
 |[Department](#department)|/api/v3/anytime/departments|(move to public)  |
 |[Config](#config)|/api/v3/anytime/configs| Get site settings| 

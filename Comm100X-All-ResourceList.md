@@ -110,7 +110,7 @@
 | [Agent Bot Learning Question](#agent-bot-learing-question) | /api/v3/bot/agentBot/learningQuestions |  
 | [Agent Bot Suggestion](#agent-bot-suggestion) | /api/v3/bot/agentBot/questionSuggestions:query | 
 
-# Resource List - Public
+# Resource List - Common
 |Name|EndPoint|Note| 
 |---|---|---| 
 |[Contact](#contact)| /api/v3/contacts|| 
