@@ -74,11 +74,11 @@
 # Resource List - AnytimeConversation
 |Name|EndPoint|Note| 
 |---|---|---| 
-|[Conversations](#conversation)|/api/v3/anytime/conversations| | 
-|[Messages](#conversation)|/api/v3/anytime/conversations/{id}/messages| | 
-|[Filters](#filter)|/api/v3/anytime/filters| Agent console filters| 
-|[Field & Mappings](#field)|/api/v3/anytime/fields| System fields and custom fields | 
-|[Routing Rules](#routingrules)|/api/v3/anytime/routingRules||
+|[Conversations](#conversations)|/api/v3/anytime/conversations| | 
+|[Messages](#message)|/api/v3/anytime/conversations/{id}/messages| | 
+|[Filters](#filters)|/api/v3/anytime/filters| Agent console filters| 
+|[Field & Mappings](#field-&-mappings)|/api/v3/anytime/fields| System fields and custom fields | 
+|[Routing Rules](#routing-rules)|/api/v3/anytime/routingRules||
 |[Auto Allocation](#auto-allocation)|/api/v3/anytime/autoAllocation||
 |[Triggers](#triggers)|/api/v3/anytime/triggers||
 |[Working Time & Holidays](#working-Time-Holidays)|/api/v3/anytime/workingTimeAndHolidays||
@@ -101,7 +101,7 @@
 |[Attachment](#attachment)|/api/v3/anytime/attachments|(move to public)?| -->
 
 # Conversations 
-## objects +
+## objects 
 ### conversation 
 | Name | Type | Description | 
 | - | - | - | 
@@ -451,13 +451,501 @@
 ### List unread conversations number for filters 
 `get api/v3/anytime/conversations/unreadCount?filterIds={filterid1}&filterIds={filterid2}&filterIds={filterid3}`
 - Parameters 
-    - filterIds: filter id array 
+    - filterIds: filter id array
 - Response 
-    - allCount: integer, all unread conversation number. 
+    - allCount: integer, all unread conversation number.
     - array including: 
         - filterId: integer, filter id 
         - unreadCount: integer, count unread conversations of a filter 
         - unreadMentionedCount: integer, the number of conversations which is unread and mentioned to me 
+
+
+# Filters
+## objects
+### filter
+| Name | Type | Description |
+| - | - | - |
+| `id` | integer | filter id |
+| `name` | string | filter name |
+| `isPrivate` | boolean | if private filter|
+| `createdById` | integer | agent id |
+| `conditions` | [condition](#condition)[] | array of filter condition |
+
+### condition 
+| Name | Type | Description | 
+| - | - | - | 
+| `id` | integer | condition id | 
+| `fieldId` | integer | field id | 
+| `matchType` | string | `contains`, `notContains`, `is`, `isNot`, `isMoreThan`, `isLessThan`, `before`, `after` | 
+| `value` | string | condition value | 
+
+## endpoints 
+### List all public and private filters 
+`get /api/v3/anytime/filters`
+- Parameters 
+    - no parameters 
+- Response 
+    - filters: [filter](#filter) list, without conditions
+
+### Create a new filter 
+`post api/v3/anytime/filters`
+- Parameters 
+    - name: string, filter name, required 
+    - isPrivate: boolean, if private filter, default value: `false` 
+    - conditions: [condition](#condition)[], array of filter condition
+- Response 
+    - filters: [filter](#filter) list 
+
+### Get a filter and its conditions 
+`get api/v3/anytime/filters/{id}` 
+- Parameters 
+    - id: integer, filter id 
+- Response 
+    - filter: [filter](#filter) 
+
+### Update a filter 
+`put api/v3/anytime/filters/{id}` 
+- Parameters 
+    - id: integer, filter id 
+    - name: string, filter name, required 
+    - isPrivate: boolean, if private filter 
+    - conditions: [condition](#condition)[], array of filter condition
+- Response 
+    - filter: [filter](#filter) 
+
+### Delete a filter 
+`delete api/v3/anytime/filters/{id}` 
+- Parameters 
+    - id: integer, filter id 
+- Response 
+    - http status code 
+
+
+# Field & Mappings
+## objects 
+### field 
+| Name | Type | Description | 
+| - | - | - | 
+| `id` | integer | field id | 
+| `type` | string | `text`, `textarea`, `email`, `url`, `date`, `integer`, `float`, `operator`, <br/>`radio`, `checkbox`, `dropdownList`, `checkboxList`, `link`, `department` | 
+| `name` | integer | field name | 
+| `isSystemField` | boolean | if is system field | 
+| `isRequired` | boolean | value if is required | 
+| `defaultValue` | string | field default value | 
+| `helpText` | string | field help text | 
+| `length` | integer | field value max length | 
+| `options` | [field option](#fieldoption)[] | value option | 
+
+### fieldOption 
+| Name | Type | Description | 
+| - | - | - | 
+| `id` | integer | option id | 
+| `name` | string | option name | 
+| `value` | string | field value | 
+| `order` | integer | option order | 
+
+## endpoints 
+### List all fields and their options 
+`get api/v3/anytime/fields` 
+- Parameters
+    - no parameters
+- Response 
+    - fields: [field](#field) list 
+
+<!-- # Attachments 
+## objects 
+### attachment 
+| Name | Type | Description | 
+| - | - | - | 
+| `guid` | string | attachment unique id | 
+| `fileName` | string | attachment file name| 
+| `url` | string | attachment download link | 
+| `isAvailable` | boolean | if the attachment is available | 
+## endpoints 
+### Upload attachment 
+`post /api/v3/anytime/attachments` 
+- Content-type
+    - multipart/form-data
+- Parameters 
+    - file: file
+- Response 
+    - attachment: [attachment](#attachment) 
+    
+### Update status of attachment
+`Put /api/v3/livechat/attachments/{guid}`
+#### Parameters:
+- isAvailable - boolean `true` or  `false`
+#### Response
+ - attachment: [attachment](#attachment) 
+
+### Delete attachment 
+`delete /api/v3/anytime/attachments/{guid}` 
+- Parameters 
+    - guid: string, the guid of the attachment
+- Response 
+    - httpStatusCode -->
+  
+# Routing Rules
+## objects
+### routing rule
+| Name | Type | Description | 
+| - | - | - | 
+| `id` | integer | routing rule id | 
+| `isEnable` | boolean | is Enable | 
+| `type` | string | `simple` / `cusomterrules` | 
+| `SimpleRouteToObject` | string |  | 
+| `SimpleRouteToId` | integer |  | 
+| `SimpleRouteToPriority` | string |  | 
+| `matchFailedRouteToObject` | string |  | 
+| `matchFailedRouteToId` | int |  | 
+| `matchFailedRouteToPriority` | string |  | 
+| [customerRouteRules](###customerRule) | object |  | 
+
+### customerRule
+| Name | Type | Description | 
+| - | - | - | 
+| `id` | integer | customer rule id | 
+| `isEnable` | boolean | is Enable | 
+| `name` | string | rouleName | 
+| `when` | int | `Any=0` `All=1` `logicalExpresion=2` (tbd)| 
+| `logicExpression` | string |  | 
+| `routeToObject` | string |  | 
+| `routeToId` | int |  | 
+| `routeToPriority` | string |  | 
+| `index` | int | | 
+| [conditions](###conditions) | object |  | 
+
+<!--### conditions 
+ 
+| Name | Type | Description | 
+| - | - | - | 
+| `id` | integer |  condition id | 
+| `FieldId` | integer |  Field Id | 
+| `ConditionMatchType` | integer |  `Is=1`,`IsNot=2`,`IsMoreThan=3`,`IsLessThan=4`,`Contain=5`,`NotContain=6`,`Before=7`,`After=8`,`Between=9`| 
+| `value` | string |  value  | 
+| `index` | int |  order index  |  -->
+
+### condition 
+-需要统一定义一个 matchType的枚举？
+| Name | Type | Description | 
+| - | - | - | 
+| `id` | integer | condition id | 
+| `fieldId` | integer | field id | 
+| `matchType` | string | `contains`, `notContains`, `is`, `isNot`, `isMoreThan`, `isLessThan`, `before`, `after` | 
+| `value` | string | condition value | 
+| `index` | int |  order index  | 
+
+
+## endpoints 
+### List all routingrules 
+`Get api/v3/anytime/Routingrules` 
+- Response 
+    - routingrules: [routingrule](#routingrule) list 
+
+### Enable a routingrules 
+`Put api/v3/anytime/Routingrules/{id}/enable` 
+- Parameters
+  - isEnable:boolean , enable or not,first time to enable will add a default routing rule
+- Response 
+    - routingrule: [routingrule](#routingrule)  
+
+### Update One routingrule 
+`Put api/v3/anytime/Routingrules/{id}` 
+- Parameters 
+    - `isEnable` , boolean, is Enable 
+    - `type`,string , `simple` / `cusomterrules` 
+    - `SimpleRouteToObject` , string
+    - `SimpleRouteToId` , integer 
+    - `SimpleRouteToPriority` , string 
+    - `matchFailedRouteToObject` , string 
+    - `matchFailedRouteToId` , int ,  
+    - `matchFailedRouteToPriority` , string 
+- Response 
+    - routingrule: [routingrule](#routingrule) 
+
+### List all customerRules of routingrule
+`Get api/v3/anytime/Routingrules/{id}/customerrules` 
+
+- Response 
+    - http status code
+
+### add a customerRule  
+`post api/v3/anytime/Routingrules/{id}/customerrules` 
+- Parameters 
+        -customerRule:[customerRule](###customerRule)
+- Response 
+    - customerRule:[customerRule](###customerRule)
+### copy a customerRule  
+`put api/v3/anytime/Routingrules/{id}/customerrules/{customerruleId}/copy` 
+- Parameters 
+- Response 
+    - customerRule:[customerRule](###customerRule)
+  
+### sort a customerRule  
+`put api/v3/anytime/Routingrules/{id}/customerrules/{customerruleId}/sort` 
+- Parameters
+    - customerRules:[customerRules](###customerRule)
+- Response 
+    - routingrule: [routingrule](#routingrule)
+
+### delete a customerRule 
+`delete api/v3/anytime/Routingrules/customerrules/{id}` 
+
+- Response 
+    - http status code
+
+# Auto Allocation 
+## objects 
+### auto allocation
+(to add)
+
+# Triggers 
+## objects 
+### trigger
+(to add)
+
+# Working Time & Holidays 
+## objects 
+### working time & holidays 
+(to add)
+
+# SLA Policies 
+## objects 
+### sLA policies
+(to add)
+
+
+# Blocked Senders
+## objects 
+### blocked sender 
+| Name | Type | Description | 
+| - | - | - | 
+| `email` | string | email or domain | 
+| `blockType` | string | `blockEmailasJunk`, `rejectEmail`, `blockDomainasJunk`, `rejectDomain` | 
+
+## endpoints 
+### List blocked senders 
+`get /api/v3/anytime/blockedSenders` 
+- Parameters 
+    - email: string, domain or email address 
+- Response 
+    - blockedSenders: [block sender](#blocked-sender) list 
+
+### Add/update a block sender 
+`put api/v3/anytime/blockedSenders` 
+- Parameters 
+    - `email`, string, domain or email address 
+    - `blockType`, string, `blockEmailasJunk`, `rejectEmail`, `blockDomainasJunk`, `rejectDomain`
+- Response 
+    - blockedSender: [block sender](#blocked-sender) 
+
+### Remove a block sender 
+`delete api/v3/anytime/blockedSenders` 
+- Parameters 
+   - email: string, domain or email address 
+- Response 
+    - http status code
+
+<!-- # CannedResponses 
+## objects 
+### canned response 
+| Name | Type | Description | 
+| - | - | - | 
+| `id` | integer | id | 
+| `name` | string | canned response name | 
+| `htmlContent` | string | html format content | 
+| `textContent` | string | text format content | 
+
+
+## endpoints 
+### List all canned responses 
+`get api/v3/anytime/cannedResponses` 
+- Parameters 
+    - no parameters
+- Response 
+    - cannedResponses: [Canned responses](#canned-response) list  -->
+
+
+<!-- # Configs 
+### Get site configs about conversation 
+`get api/v3/anytime/configs` 
+- Parameters 
+    - no parameters
+- Response 
+    - configs
+        - isEnabledDepartment: boolean 
+        - recipientLimitPerEmail: integer  -->
+
+<!-- # Department 
+## objects 
+### department 
+| Name | Type | Description | 
+| - | - | - | 
+| `id` | integer | id | 
+| `name` | string | department name | 
+| `description` | string | department description | 
+| `members` | [department member](#department-member)[] | department member array | 
+
+### department member 
+| Name | Type | Description | 
+| - | - | - | 
+| `id` | integer | id | 
+| `name` | string | member name | 
+| `type` | string | agent or group | 
+
+## endpoints 
+### Get a department 
+`get api/v3/anytime/departments/{id} ` 
+- Response 
+    - department: [department](#department) 
+
+### List all departments 
+`get api/v3/anytime/departments` 
+- Response 
+    - departments: [department](#department) List without department member.  -->
+
+# Email Accounts 
+## objects 
+### email account 
+| Name | Type | Description | 
+| - | - | - | 
+| `id` | integer | id | 
+| `email` | string | email address |  
+| `type` | string | pop3 or exchange | 
+| `agentAssigneeId` | integer | agent id | 
+| `departmentAssigneeId` | integer | department id | 
+| `isDefault` | boolean | if default email account | 
+
+
+## endpoints 
+### List all enabled email accounts 
+`get api/v3/anytime/emailAccounts` 
+- Response 
+    - emailAccounts: [email account](#email-account) list 
+
+# IntegrationAccount 
+## objects 
+### integration account
+(add)
+
+# Junk Emails 
+## objects 
+### junk email 
+| Name | Type | Description | 
+| - | - | - | 
+| `id` | integer | id | 
+| `subject` | string | email subject | 
+| `time` | datetime | received time | 
+| `name` | string | sender name | 
+| `from` | string | email from email address | 
+| `to` | string | to email addresses | 
+| `cc` | string | cc email addresses | 
+| `htmlBody` | string | html body | 
+| `plainBody` | string | plain text body | 
+| `emailAccountId` | integer | receive email account id | 
+| `isRead` | boolean | if is read | 
+| `attachments` | [attachment](#attachment)[] | attachments | 
+
+## endpoints 
+### List junk emails
+`get api/v3/anytime/junkEmails` 
+
+- Parameters 
+    - keywords: string
+    - pageIndex: integer
+    - timeFrom: DateTime
+    - timeTo: DateTime
+- Response 
+    - junkEmails: [junk email](#junk-email) list 
+    - total: integer
+    - previousPage: string, next page uri, the first page return null
+    - nextPage: string, the last page return null
+    - currentPage: string
+
+### Get a junk email 
+`get api/v3/anytime/junkEmails/{id}` 
+- Parameters 
+    - id: integer, email id 
+- Response 
+    - junkEmail: [junk email](#junk-email) 
+
+### Update a junk email 
+`put api/v3/anytime/junkEmails/{id}` 
+- Parameters 
+    - isRead: boolean, 
+- Response 
+    - junkEmail: [junk email](#junk-email) 
+
+### Restore a junk email to a normal conversation 
+`post api/v3/anytime/junkEmails/{id}/notJunk` 
+- Parameters 
+    - id: integer, email id 
+- Response 
+    - conversation: [conversation](#conversation) 
+
+### Delete a junk email 
+`delete api/v3/anytime/junkEmails/{id}` 
+- Parameters 
+    - id: integer, junk email id 
+- Response 
+    - http status code 
+<!-- 
+# Tags 
+## objects 
+### tag 
+| Name | Type | Description | 
+| - | - | - | 
+| `id` | integer | id | 
+| `name` | string | tag name | 
+| `conversationCount` | integer | the number of conversations with the tag | 
+## endpoints 
+### List all tags 
+`Get api/v3/anytime/tags` 
+- Response 
+    - tags: [tag](#tag) list 
+
+### Add a tag 
+`Post api/v3/anytime/tags` 
+- Parameters 
+    - name: string, tag name 
+- Response 
+    - tag: [tag](#tag) 
+
+### Update One Tag 
+`Put api/v3/anytime/tags/{id}` 
+- Parameters 
+    - id: integer, tag id 
+    - name: string, tag name 
+- Response 
+    - tag: [tag](#tag) 
+
+### Delete a tag 
+`Delete api/v3/anytime/tags/{id}` 
+- Parameters 
+    - id: integer, tag id 
+- Response 
+    - http status code -->
+
+
+# Right Now Reports
+## objects
+### right Now reports
+(add)
+
+# Volume Reports
+## objects
+### volume report
+(add)
+
+# Channel Reports
+## objects
+### channel report
+(add)
+
+# Efficiency Reports
+## objects
+### efficiency report
+(add)
 
 # Portalconversation
 ## objects
@@ -577,439 +1065,3 @@
     - id: integer, conversation id 
 - Response 
     - http status code
-
-# Filters 
-## objects 
-### filter 
-| Name | Type | Description | 
-| - | - | - | 
-| `id` | integer | filter id | 
-| `name` | string | filter name | 
-| `isPrivate` | boolean | if private filter| 
-| `createdById` | integer | agent id | 
-| `conditions` | [condition](#condition)[] | array of filter condition | 
-
-### condition 
-| Name | Type | Description | 
-| - | - | - | 
-| `id` | integer | condition id | 
-| `fieldId` | integer | field id | 
-| `matchType` | string | `contains`, `notContains`, `is`, `isNot`, `isMoreThan`, `isLessThan`, `before`, `after` | 
-| `value` | string | condition value | 
-
-## endpoints 
-### List all public and private filters 
-`get /api/v3/anytime/filters`
-- Parameters 
-    - no parameters 
-- Response 
-    - filters: [filter](#filter) list, without conditions
-
-### Create a new filter 
-`post api/v3/anytime/filters`
-- Parameters 
-    - name: string, filter name, required 
-    - isPrivate: boolean, if private filter, default value: `false` 
-    - conditions: [condition](#condition)[], array of filter condition
-- Response 
-    - filters: [filter](#filter) list 
-
-### Get a filter and its conditions 
-`get api/v3/anytime/filters/{id}` 
-- Parameters 
-    - id: integer, filter id 
-- Response 
-    - filter: [filter](#filter) 
-
-### Update a filter 
-`put api/v3/anytime/filters/{id}` 
-- Parameters 
-    - id: integer, filter id 
-    - name: string, filter name, required 
-    - isPrivate: boolean, if private filter 
-    - conditions: [condition](#condition)[], array of filter condition
-- Response 
-    - filter: [filter](#filter) 
-
-### Delete a filter 
-`delete api/v3/anytime/filters/{id}` 
-- Parameters 
-    - id: integer, filter id 
-- Response 
-    - http status code 
-
-
-# Fields 
-## objects 
-### field 
-| Name | Type | Description | 
-| - | - | - | 
-| `id` | integer | field id | 
-| `type` | string | `text`, `textarea`, `email`, `url`, `date`, `integer`, `float`, `operator`, <br/>`radio`, `checkbox`, `dropdownList`, `checkboxList`, `link`, `department` | 
-| `name` | integer | field name | 
-| `isSystemField` | boolean | if is system field | 
-| `isRequired` | boolean | value if is required | 
-| `defaultValue` | string | field default value | 
-| `helpText` | string | field help text | 
-| `length` | integer | field value max length | 
-| `options` | [field option](#fieldoption)[] | value option | 
-
-### fieldOption 
-| Name | Type | Description | 
-| - | - | - | 
-| `id` | integer | option id | 
-| `name` | string | option name | 
-| `value` | string | field value | 
-| `order` | integer | option order | 
-
-## endpoints 
-### List all fields and their options 
-`get api/v3/anytime/fields` 
-- Parameters
-    - no parameters
-- Response 
-    - fields: [field](#field) list 
-
-<!-- # Attachments 
-## objects 
-### attachment 
-| Name | Type | Description | 
-| - | - | - | 
-| `guid` | string | attachment unique id | 
-| `fileName` | string | attachment file name| 
-| `url` | string | attachment download link | 
-| `isAvailable` | boolean | if the attachment is available | 
-## endpoints 
-### Upload attachment 
-`post /api/v3/anytime/attachments` 
-- Content-type
-    - multipart/form-data
-- Parameters 
-    - file: file
-- Response 
-    - attachment: [attachment](#attachment) 
-    
-### Update status of attachment
-`Put /api/v3/livechat/attachments/{guid}`
-#### Parameters:
-- isAvailable - boolean `true` or  `false`
-#### Response
- - attachment: [attachment](#attachment) 
-
-### Delete attachment 
-`delete /api/v3/anytime/attachments/{guid}` 
-- Parameters 
-    - guid: string, the guid of the attachment
-- Response 
-    - httpStatusCode -->
-
-
-# BlockedSenders 
-## objects 
-### blocked sender 
-| Name | Type | Description | 
-| - | - | - | 
-| `email` | string | email or domain | 
-| `blockType` | string | `blockEmailasJunk`, `rejectEmail`, `blockDomainasJunk`, `rejectDomain` | 
-
-## endpoints 
-### List blocked senders 
-`get /api/v3/anytime/blockedSenders` 
-- Parameters 
-    - email: string, domain or email address 
-- Response 
-    - blockedSenders: [block sender](#blocked-sender) list 
-
-### Add/update a block sender 
-`put api/v3/anytime/blockedSenders` 
-- Parameters 
-    - `email`, string, domain or email address 
-    - `blockType`, string, `blockEmailasJunk`, `rejectEmail`, `blockDomainasJunk`, `rejectDomain`
-- Response 
-    - blockedSender: [block sender](#blocked-sender) 
-
-### Remove a block sender 
-`delete api/v3/anytime/blockedSenders` 
-- Parameters 
-   - email: string, domain or email address 
-- Response 
-    - http status code
-
-<!-- # CannedResponses 
-## objects 
-### canned response 
-| Name | Type | Description | 
-| - | - | - | 
-| `id` | integer | id | 
-| `name` | string | canned response name | 
-| `htmlContent` | string | html format content | 
-| `textContent` | string | text format content | 
-
-
-## endpoints 
-### List all canned responses 
-`get api/v3/anytime/cannedResponses` 
-- Parameters 
-    - no parameters
-- Response 
-    - cannedResponses: [Canned responses](#canned-response) list  -->
-
-
-<!-- # Configs 
-### Get site configs about conversation 
-`get api/v3/anytime/configs` 
-- Parameters 
-    - no parameters
-- Response 
-    - configs
-        - isEnabledDepartment: boolean 
-        - recipientLimitPerEmail: integer  -->
-
-<!-- # Department 
-## objects 
-### department 
-| Name | Type | Description | 
-| - | - | - | 
-| `id` | integer | id | 
-| `name` | string | department name | 
-| `description` | string | department description | 
-| `members` | [department member](#department-member)[] | department member array | 
-
-### department member 
-| Name | Type | Description | 
-| - | - | - | 
-| `id` | integer | id | 
-| `name` | string | member name | 
-| `type` | string | agent or group | 
-
-## endpoints 
-### Get a department 
-`get api/v3/anytime/departments/{id} ` 
-- Response 
-    - department: [department](#department) 
-
-### List all departments 
-`get api/v3/anytime/departments` 
-- Response 
-    - departments: [department](#department) List without department member.  -->
-
-# EmailAccounts 
-## objects 
-### email account 
-| Name | Type | Description | 
-| - | - | - | 
-| `id` | integer | id | 
-| `email` | string | email address |  
-| `type` | string | pop3 or exchange | 
-| `agentAssigneeId` | integer | agent id | 
-| `departmentAssigneeId` | integer | department id | 
-| `isDefault` | boolean | if default email account | 
-
-
-## endpoints 
-### List all enabled email accounts 
-`get api/v3/anytime/emailAccounts` 
-- Response 
-    - emailAccounts: [email account](#email-account) list 
-
-# IntegrationAccount 
-## objects 
-### integration account
-(add)
-
-# JunkEmails 
-## objects 
-### junk email 
-| Name | Type | Description | 
-| - | - | - | 
-| `id` | integer | id | 
-| `subject` | string | email subject | 
-| `time` | datetime | received time | 
-| `name` | string | sender name | 
-| `from` | string | email from email address | 
-| `to` | string | to email addresses | 
-| `cc` | string | cc email addresses | 
-| `htmlBody` | string | html body | 
-| `plainBody` | string | plain text body | 
-| `emailAccountId` | integer | receive email account id | 
-| `isRead` | boolean | if is read | 
-| `attachments` | [attachment](#attachment)[] | attachments | 
-
-## endpoints 
-### List junk emails
-`get api/v3/anytime/junkEmails` 
-
-- Parameters 
-    - keywords: string
-    - pageIndex: integer
-    - timeFrom: DateTime
-    - timeTo: DateTime
-- Response 
-    - junkEmails: [junk email](#junk-email) list 
-    - total: integer
-    - previousPage: string, next page uri, the first page return null
-    - nextPage: string, the last page return null
-    - currentPage: string
-
-### Get a junk email 
-`get api/v3/anytime/junkEmails/{id}` 
-- Parameters 
-    - id: integer, email id 
-- Response 
-    - junkEmail: [junk email](#junk-email) 
-
-### Update a junk email 
-`put api/v3/anytime/junkEmails/{id}` 
-- Parameters 
-    - isRead: boolean, 
-- Response 
-    - junkEmail: [junk email](#junk-email) 
-
-### Restore a junk email to a normal conversation 
-`post api/v3/anytime/junkEmails/{id}/notJunk` 
-- Parameters 
-    - id: integer, email id 
-- Response 
-    - conversation: [conversation](#conversation) 
-
-### Delete a junk email 
-`delete api/v3/anytime/junkEmails/{id}` 
-- Parameters 
-    - id: integer, junk email id 
-- Response 
-    - http status code 
-<!-- 
-# Tags 
-## objects 
-### tag 
-| Name | Type | Description | 
-| - | - | - | 
-| `id` | integer | id | 
-| `name` | string | tag name | 
-| `conversationCount` | integer | the number of conversations with the tag | 
-## endpoints 
-### List all tags 
-`Get api/v3/anytime/tags` 
-- Response 
-    - tags: [tag](#tag) list 
-
-### Add a tag 
-`Post api/v3/anytime/tags` 
-- Parameters 
-    - name: string, tag name 
-- Response 
-    - tag: [tag](#tag) 
-
-### Update One Tag 
-`Put api/v3/anytime/tags/{id}` 
-- Parameters 
-    - id: integer, tag id 
-    - name: string, tag name 
-- Response 
-    - tag: [tag](#tag) 
-
-### Delete a tag 
-`Delete api/v3/anytime/tags/{id}` 
-- Parameters 
-    - id: integer, tag id 
-- Response 
-    - http status code -->
-
-
-# Routingrules
-## objects
-### routingrule
-| Name | Type | Description | 
-| - | - | - | 
-| `id` | integer | routing rule id | 
-| `isEnable` | boolean | is Enable | 
-| `type` | string | `simple` / `cusomterrules` | 
-| `SimpleRouteToObject` | string |  | 
-| `SimpleRouteToId` | integer |  | 
-| `SimpleRouteToPriority` | string |  | 
-| `matchFailedRouteToObject` | string |  | 
-| `matchFailedRouteToId` | int |  | 
-| `matchFailedRouteToPriority` | string |  | 
-| [customerRouteRules](###customerRule) | object |  | 
-
-### customerRule
-| Name | Type | Description | 
-| - | - | - | 
-| `id` | integer | customer rule id | 
-| `isEnable` | boolean | is Enable | 
-| `name` | string | rouleName | 
-| `when` | int | `Any=0` `All=1` `logicalExpresion=2` (tbd)| 
-| `logicExpression` | string |  | 
-| `routeToObject` | string |  | 
-| `routeToId` | int |  | 
-| `routeToPriority` | string |  | 
-| `index` | int | | 
-| [conditions](###conditions) | object |  | 
-
-### conditions
-| Name | Type | Description | 
-| - | - | - | 
-| `id` | integer |  condition id | 
-| `FieldId` | integer |  Field Id | 
-| `ConditionMatchType` | integer |  `Is=1`,`IsNot=2`,`IsMoreThan=3`,`IsLessThan=4`,`Contain=5`,`NotContain=6`,`Before=7`,`After=8`,`Between=9`| 
-| `value` | string |  value  | 
-| `index` | int |  order index  | 
-
-## endpoints 
-### List all routingrules 
-`Get api/v3/anytime/Routingrules` 
-- Response 
-    - routingrules: [routingrule](#routingrule) list 
-
-### Enable a routingrules 
-`Put api/v3/anytime/Routingrules/{id}/enable` 
-- Parameters
-  - isEnable:boolean , enable or not,first time to enable will add a default routing rule
-- Response 
-    - routingrule: [routingrule](#routingrule)  
-
-### Update One routingrule 
-`Put api/v3/anytime/Routingrules/{id}` 
-- Parameters 
-    - `isEnable` , boolean, is Enable 
-    - `type`,string , `simple` / `cusomterrules` 
-    - `SimpleRouteToObject` , string
-    - `SimpleRouteToId` , integer 
-    - `SimpleRouteToPriority` , string 
-    - `matchFailedRouteToObject` , string 
-    - `matchFailedRouteToId` , int ,  
-    - `matchFailedRouteToPriority` , string 
-- Response 
-    - routingrule: [routingrule](#routingrule) 
-
-### List all customerRules of routingrule
-`Get api/v3/anytime/Routingrules/{id}/customerrules` 
-
-- Response 
-    - http status code
-
-### add a customerRule  
-`Get api/v3/anytime/Routingrules/{id}/customerrules` 
-
-- Response 
-    - http status code
-
-# Auto Allocation 
-## objects 
-### auto allocation
-(to add)
-
-# Trigger 
-## objects 
-### trigger
-(to add)
-
-# Working Time & Holidays 
-## objects 
-### working time & holidays 
-(to add)
-
-# SLA Policies 
-## objects 
-### sLA policies
-(to add)
