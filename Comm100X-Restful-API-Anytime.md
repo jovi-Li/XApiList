@@ -591,7 +591,7 @@
 | Name | Type | Description | 
 | - | - | - | 
 | `id` | integer | routing rule id | 
-| `isEnable` | boolean | is Enable | 
+| `isEnable` | boolean | is enable | 
 | `type` | string | `simple` / `cusomterrules` | 
 | `SimpleRouteToObject` | string |  | 
 | `SimpleRouteToId` | integer |  | 
@@ -605,7 +605,7 @@
 | Name | Type | Description | 
 | - | - | - | 
 | `id` | integer | customer rule id | 
-| `isEnable` | boolean | is Enable | 
+| `isEnable` | boolean | is enable | 
 | `name` | string | rouleName | 
 | `when` | int | `Any=0` `All=1` `logicalExpresion=2` (tbd)| 
 | `logicExpression` | string |  | 
@@ -625,7 +625,7 @@
 | `value` | string |  value  | 
 | `index` | int |  order index  |  -->
 
-### condition 
+### condition
 -需要统一定义一个 matchType的枚举？
 | Name | Type | Description | 
 | - | - | - | 
@@ -702,7 +702,82 @@
 # Triggers 
 ## objects 
 ### trigger
-(to add)
+<!-- |[Triggers](#triggers)|/api/v3/anytime/triggers|| -->
+| Name | Type | Description | 
+| - | - | - | 
+| `id` | int | trigger Id | 
+| `name` | string | trigger name | 
+| `description` | string |description | 
+| `triggerEvent` | smallint |[Trigger Event Enum](###trigger-enum) | 
+| `ifEnable` | boolen |if enable | 
+| `orderId` | int | order id |  
+| `ifSendEmailToContacts` | boolean | if sendEmail to contacts |  
+| `ifShownInTicketCorresdence` | boolean | With this option selected, the trigger email will be displayed in your Conversation Correspondence thread. | 
+| `stayStatus` | boolean | trigger event in(`staysAtStatusPeriod`,`statusIsChanged`) | 
+| `stayTimeSpan` | boolean | trigger event=`staysAtStatusPeriod` | 
+| [conditions](###trigger-conditions) | object |  | 
+| [actions](###trigger-action) | object |  | 
+
+
+### trigger event
+修改为string？
+| Name | value | Description |  
+| - | - | - |  
+| `conversationCreated` | 1 |When a conversation is created|
+| `conversationReplyIsReceived` | 2 | When a conversation reply is received(7&2) | 
+| `agentReplied` | 3 | When agent replied | 
+| `assigneeIsChanged` | 4 | When the assignee of a conversation is changed|
+| `statusIsChanged` | 5 | When the status of a conversation is changed  | 
+| `staysAtStatusPeriod` | 6 | When a conversation stays at a status for a specified period of time | 
+
+
+### trigger conditions
+<!-- 为什么要公用一个表？ -->
+| Name | value | Description |  
+| - | - | - |  
+|[condition](###condition)| object | |
+<!-- | `triggerId` | int | trigger id |   -->
+### trigger actions
+| Name | Type | Description | 
+| - | - | - | 
+| `action type` | string | trigger name | 
+| `subject` | string |action type=`SendEmail` |
+| `htmlBody` | string |action type=`SendEmail` |
+| `textBody` | string |action type=`SendEmail` |
+
+### trigger action type
+| Name | value | Description |  
+| - | - | - |  
+| `Set Value` | `SetValue` | |
+| `Send Email ` | `SendEmail`  |  | 
+| `To Conversation Contact` | `ToConversationContact` |  | 
+| `To Agent` | `ToAgent` | |
+| `Set Email Content` | `SetEmailContent` || 
+
+
+## endpoints 
+### List triggers 
+`get /api/v3/anytime/triggers` 
+- Parameters 
+    - email: string, domain or email address 
+- Response 
+    - blockedSenders: [block sender](#blocked-sender) list 
+
+### Add/update a trigger  
+`put api/v3/anytime/triggers` 
+- Parameters 
+    - `email`, string, domain or email address 
+    - `blockType`, string, `blockEmailasJunk`, `rejectEmail`, `blockDomainasJunk`, `rejectDomain`
+- Response 
+    - blockedSender: [block sender](#blocked-sender) 
+
+### Remove a trigger  
+`delete api/v3/anytime/triggers` 
+- Parameters 
+   - email: string, domain or email address 
+- Response 
+    - http status code
+
 
 # Working Time & Holidays 
 ## objects 
