@@ -95,20 +95,20 @@
 # Resource List - Bot
 |Name|EndPoint|Note| 
 |---|---|---| 
-| [Bot](#bot) | /api/v3/bot/bots |
-| [Intent](#intent) | /api/v3/bot/bots/{bot_id}/intents |  
-| [Entity](#entity) | /api/v3/bot/bots/{bot_id}/entities |  
-| [Category](#category) | /api/v3/bot/bots/{bot_id}/categories |  
-| [Smart Trigger](#smart-trigger) | /api/v3/bot/bots/{bot_id}/smartTriggers |  
-| [Quick Reply](#quick-reply) | /api/v3/bot/bots/{bot_id}/quickReplies |  
-| [Learning Question](#learning-question) | /api/v3/bot/bots/{bot_id}/learningquestions | 
-| [Report](#report) | /api/v3/bot/bots/{bot_id}/reports | 
-| [General](#general) | /api/v3//bot/genaral |
-| [Agent Bot Setting](#agent-bot-setting) | /api/v3/bot/agentBot/setting |
-| [Agent Bot Word Weight](#agent-bot-word-weight) | /api/v3/bot/agentBot/wordWeight |
-| [Agent Bot Synonym](#agent-bot-synonym) | /api/v3/bot/agentBot/synonyms | 
-| [Agent Bot Learning Question](#agent-bot-learing-question) | /api/v3/bot/agentBot/learningQuestions |  
-| [Agent Bot Suggestion](#agent-bot-suggestion) | /api/v3/bot/agentBot/questionSuggestions:query | 
+| [Bot](#bot) | /api/v3/aI/bots |
+| [Intent](#intent) | /api/v3/aI/bots/{bot_id}/intents |  
+| [Entity](#entity) | /api/v3/aI/bots/{bot_id}/entities |  
+| [Category](#category) | /api/v3/aI/bots/{bot_id}/categories |  
+| [Smart Trigger](#smart-trigger) | /api/v3/aI/bots/{bot_id}/smartTriggers |  
+| [Quick Reply](#quick-reply) | /api/v3/aI/bots/{bot_id}/quickReplies |  
+| [Learning Question](#learning-question) | /api/v3/aI/bots/{bot_id}/learningquestions | 
+| [Report](#report) | /api/v3/aI/bots/{bot_id}/reports | 
+| [General](#general) | /api/v3/aI/genaral |
+| [Agent Bot Setting](#agent-bot-setting) | /api/v3/aI/agentBot/setting |
+| [Agent Bot Word Weight](#agent-bot-word-weight) | /api/v3/aI/agentBot/wordWeight |
+| [Agent Bot Synonym](#agent-bot-synonym) | /api/v3/aI/agentBot/synonyms | 
+| [Agent Bot Learning Question](#agent-bot-learing-question) | /api/v3/aI/agentBot/learningQuestions |  
+| [Agent Bot Suggestion](#agent-bot-suggestion) | /api/v3/aI/agentBot/questionSuggestions/query | 
 
 # Resource List - Common
 |Name|EndPoint|Note| 
@@ -128,7 +128,7 @@
 |[Audit Log](#audit-log)|/api/v3/auditLogs||
 |[Agent Single Sign-On](#agent-single-sign-on)|/api/v3/agentSingleSignOn||
 |[Agent reports ](#agent-reports)|/api/v3/reports/agentReports |Availability/Canned Message  |
-|[webhooks](#webhooks)|/api/v3/webhooks/ |  |
+|[webhooks](#webhooks)|/api/v3/webhooks |  |
 
 
 
